@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
   const TodoBox = styled.div`
   display: inline-block;
-  margin: .5rem 1rem;
+  margin: .25rem 1rem;
    text-decoration: ${props=> props.isChecked ? 'line-through' : null};
    color: ${props=> props.isChecked ? 'gray' : null};
   
@@ -28,7 +28,7 @@ const handleKeyDown = (event) => {
 }
 
   // todo 에 마우스 hover 시 DeleteBtn 보이게 하기
-  const [ onMouseEnter, setOnMouseEnter ] = useState(false);
+  const [ isMouseEnter, setOnMouseEnter ] = useState(false);
   const handleMouseEnter = () => {
     setOnMouseEnter(true)
   }
@@ -53,12 +53,14 @@ const handleKeyDown = (event) => {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         isChecked={isChecked}>
-          {todo.content}
-          {onMouseEnter
-            ? <DeleteBtn todo={todo} onClick={onRemove}/>   
-            : <span></span>
-            }
+        {todo.content}
       </TodoBox>
+        <DeleteBtn
+          todo={todo}
+          onClick={onRemove}
+          isMouseEnter={isMouseEnter}
+          handleMouseEnter={handleMouseEnter}
+          handleMouseLeave={handleMouseLeave}/>
     </>
   );
 }

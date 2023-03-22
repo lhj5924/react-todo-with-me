@@ -18,7 +18,7 @@ module.exports = {
           options: {
             presets: [
               '@babel/preset-env',
-              ['@babel/preset-react', { runtime: 'automatic' }],
+              ['@babel/preset-react', { runtime: 'automatic' }], // 오토매틱 : 자동으로 변환해주는 도구. 필수 설정임!!
             ],
           },
         },

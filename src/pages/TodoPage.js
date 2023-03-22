@@ -4,7 +4,6 @@ import styled from 'styled-components';
 
 const StyledTodoContainer = styled.section`
 height: 100%;
-background-color: lightblue;
 display: flex;
 flex-direction: column;
 align-items: center;

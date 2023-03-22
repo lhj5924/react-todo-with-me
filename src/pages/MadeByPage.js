@@ -15,9 +15,29 @@ margin-top: 2rem;
 `
 const StyledImg = styled.img`
 width: 70%;
+filter: drop-shadow(4px 8px 8px rgba(0,0,0,0.3));
 `
 const StyledContact = styled.div`
+padding: 1rem 3rem;
+background-color: rgb(242, 115, 112, .2);
+box-shadow: 1px 1px 5px rgba(0,0,0,0.4);
+& > a {
+  display: block;
+  color: #000;
+  text-decoration: none;
+  &:visited{
+    color: #F27370;
+  }  
+  &:hover{
+    color: #22559C;
+    text-decoration: underline;
+  }
+}
 `
+const StyledFooter = styled.footer`
+font-size: 1rem;
+`
+
 export default function MadeByPage() {
 
   return (
@@ -26,13 +46,13 @@ export default function MadeByPage() {
       <StyledImg src={require('../img/nagi.png')}></StyledImg>
       <StyledContact>
         <div>HyunJin</div>
-        <div>gitHub : lhj5924</div>
-        <div>velog.io/@lhj5924</div>
+        <a href='https://github.com/lhj5924/react-todo-with-me'>gitHub : lhj5924</a>
+        <a href='https://velog.io/@lhj5924'>velog.io/@lhj5924</a>
       </StyledContact>
-      <footer>
+      <StyledFooter>
         <div>ToDo With Me :)</div>
         <div>Made by HyunJin Lee</div>
-      </footer>
+      </StyledFooter>
     </StyledMadeByContainer>
     </>
   )

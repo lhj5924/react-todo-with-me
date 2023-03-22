@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import { React, useEffect, useState } from 'react';
 import todoList from '../static/todoList';
 import Todo from './Todo';
 import styled from 'styled-components'
@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const StyledInputTodoBox = styled.div`
 position: fixed;
 bottom: 0;
+display: flex;
 `
 const StyledInput = styled.input`
 padding: 1rem;
@@ -17,16 +18,43 @@ border : none;
 background-color: transparent;
 font-size: 2rem;
 `
+const StyledUl = styled.ul`
+width: 100%;
+display: flex;
+flex-direction: column;
+align-items: stretch;
+margin-bottom: 3.5rem;
+`
 const StyledTodoLi = styled.li`
+min-height: 2.5rem;
 display: grid;
 grid-template-columns: 3rem 1fr 3rem;
-margin: 0 2rem;
+margin: 0.5rem;
+background-color: rgb(242, 115, 112, .2);
+border-radius: 1rem;
+padding: 0.5rem 0.5rem;
+box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+&:hover{
+    background-color: rgb(242, 115, 112, .3);
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.4);
+    transform: scale(1.05);
+}
 `
 
 function TodoContainer () {
     
     let [newTodo, setNewTodo] = useState('')
     let [newTodoList, setNewTodoList] = useState(todoList)
+
+    // 페이지가 렌더링되면 기존 로컬스토리지의 투두리스트를 읽어와서 newTodoList로 세팅해주기
+    useEffect(()=>{
+        let getTodo = JSON.parse(localStorage.getItem('Todolist'));
+        setNewTodoList(getTodo);
+    }, [])
+    // newTodoList 가 업데이트 되면 로컬 스토리지에 저장하기
+    useEffect(()=>{
+        localStorage.setItem('Todolist', JSON.stringify(newTodoList))
+    }, [newTodoList])
 
     // 할일 추가하기
     const handleButtonClick = (event) => {
@@ -54,7 +82,7 @@ function TodoContainer () {
 
     return (
         <>
-            <ul className="todos">
+            <StyledUl className="todos">
                 {newTodoList.map((todo) =>
                 <>
                     <StyledTodoLi key={todo.id}>
@@ -64,7 +92,7 @@ function TodoContainer () {
                     </StyledTodoLi>
                 </>
                 )}
-            </ul>
+            </StyledUl>
             <StyledInputTodoBox>
                 <StyledInput
                 type="text"
@@ -72,9 +100,6 @@ function TodoContainer () {
                 className="newTodoBox__input--newTodo"
                 onChange={handleChangeNewTodo}
                 value={newTodo}
-                // contentEditable="false"
-                // onDoubleClick={handleOnDoubleClick}
-                // onKeyDown={handleKeyDown}
                 ></StyledInput>
 
                 <StyledInputBtn 

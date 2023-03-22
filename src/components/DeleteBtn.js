@@ -4,11 +4,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // 휴지통 아이콘 넣기
 
 const StyledDeleteBtn = styled.button`
+width: 100%;
+height: 100%;
+
+display: flex;
+justify-content: center;
+align-items: center;
 background-color: transparent;
-color: red;
+color: ${props=> props.isMouseEnter ? 'red' : 'transparent'};
 `
 
-function DeleteBtn ({todo, onClick}) {
+function DeleteBtn ({todo, onClick, isMouseEnter, handleMouseEnter, handleMouseLeave}) {
 
   function handleOnClick() {
       console.log(`DeleteBtn - ${todo.id}`);
@@ -16,13 +22,16 @@ function DeleteBtn ({todo, onClick}) {
   }
 
   return (
-      <span>
+      <div
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}>
           <StyledDeleteBtn 
           onClick={handleOnClick}
+          isMouseEnter={isMouseEnter}
           >
             <FontAwesomeIcon icon="fa-solid fa-trash-can" />
           </StyledDeleteBtn>
-      </span>
+      </div>
   )
 }
 
