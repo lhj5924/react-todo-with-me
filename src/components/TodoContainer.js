@@ -5,8 +5,8 @@ import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const StyledInputTodoBox = styled.div`
-position: fixed;
-bottom: 0;
+position: sticky;
+top: 0;
 display: flex;
 `
 const StyledInput = styled.input`
@@ -17,6 +17,10 @@ const StyledInputBtn = styled.button`
 border : none;
 background-color: transparent;
 font-size: 2rem;
+color: #22559C;
+&:hover{
+    color: #F27370;
+}
 `
 const StyledUl = styled.ul`
 width: 100%;
@@ -82,17 +86,6 @@ function TodoContainer () {
 
     return (
         <>
-            <StyledUl className="todos">
-                {newTodoList.map((todo) =>
-                <>
-                    <StyledTodoLi key={todo.id}>
-                        <Todo todo={todo}
-                        onRemove={onRemove}
-                        />
-                    </StyledTodoLi>
-                </>
-                )}
-            </StyledUl>
             <StyledInputTodoBox>
                 <StyledInput
                 type="text"
@@ -108,6 +101,17 @@ function TodoContainer () {
                 <FontAwesomeIcon icon="fa-solid fa-circle-plus" />
                 </StyledInputBtn>
             </StyledInputTodoBox>
+            <StyledUl className="todos">
+                {newTodoList.map((todo) =>
+                <>
+                    <StyledTodoLi key={todo.id}>
+                        <Todo todo={todo}
+                        onRemove={onRemove}
+                        />
+                    </StyledTodoLi>
+                </>
+                )}
+            </StyledUl>
         </>
     )
 }

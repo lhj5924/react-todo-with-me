@@ -5,10 +5,11 @@ import styled from 'styled-components';
 
   const TodoBox = styled.div`
   display: inline-block;
-  margin: .25rem 1rem;
+  padding: .25rem 1rem;
    text-decoration: ${props=> props.isChecked ? 'line-through' : null};
    color: ${props=> props.isChecked ? 'gray' : null};
-  
+  white-space:normal; // 줄바꿈
+  min-height: max-content;
   `
 
 
